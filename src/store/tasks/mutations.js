@@ -8,7 +8,7 @@ export default {
     // Vue.delete(state.tasks, id)
     delete state.tasks[id]
   },
-  addTask({commit}, task) {
-
+  addTask(state, payload) {
+    state.tasks[payload.id] = payload.task
   }
 }

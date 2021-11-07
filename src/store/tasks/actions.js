@@ -1,3 +1,5 @@
+import {uid} from "quasar";
+
 export default {
   updateTask({commit}, payload) {
     commit('updateTask', payload)
