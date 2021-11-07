@@ -32,7 +32,7 @@
         round
         dense
         color="primary"
-        icon="card_giftcard"
+        icon="delete"
         @click="promptToDelete">
 
       </q-btn>
@@ -46,8 +46,8 @@ import {mapActions} from 'vuex'
 export default {
   props: ['task', 'id'],
   methods: {
-    ...mapActions("tasks", ["updateTask"]),
-    promptToDelete(id) {
+    ...mapActions("tasks", ["updateTask","deleteTask"]),
+    promptToDelete() {
       this.$q.dialog({
         title: 'Confirm',
         message: 'Are you sure to delete ?',
@@ -59,7 +59,7 @@ export default {
         },
         persistent: true
       }).onOk(() => {
-        console.log('>>>> OK')
+        this.deleteTask(this.id);
       }).onCancel(() => {
         console.log('>>>>> Cancel')
       }).onDismiss(() => {

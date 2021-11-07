@@ -2,6 +2,13 @@
   <q-page class="q-pa-md">
     <q-list bordered separator>
       <task v-for="(task, key) in tasks" v-ripple :key="task" :task="task" :id="key"></task>
+      <div class="absolute-bottom text-center q-mb-lg">
+        <q-btn round color="primary" size="24px" icon="add" @click="showAddTask = !showAddTask"></q-btn>
+      </div>
+
+      <q-dialog v-model="showAddTask">
+        <add-task/>
+      </q-dialog>
       <!--      <q-item v-for="task in tasks" v-ripple :key="task" :class="!task.completed ? 'bg-orange-1' : 'bg-green-3'">-->
       <!--        <q-item-section side top>-->
       <!--          <q-checkbox v-model="task.completed" :model-value="task.completed"></q-checkbox>-->
@@ -34,10 +41,16 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import Task from "components/Task";
+import Task from "components/Tasks/Task";
+import AddTask from "components/Tasks/Modals/AddTask";
 
 export default {
-  components: {Task},
+  data() {
+    return {
+      showAddTask: false
+    }
+  },
+  components: {AddTask, Task},
   computed: {
     ...mapGetters('tasks', ['tasks'])
   }

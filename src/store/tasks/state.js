@@ -1,6 +1,5 @@
 export default {
   tasks: {
-
     'ID1': {
       name: 'Go to shop',
       completed: false,
