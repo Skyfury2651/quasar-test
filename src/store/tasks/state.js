@@ -14,7 +14,7 @@ export default {
     },
     'ID3': {
       name: 'Get so bao hiem',
-      completed: false,
+      completed: true,
       dueDate: '2021/11/05',
       dueTime: '15:00',
     },

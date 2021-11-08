@@ -17,19 +17,15 @@
 
 <script>
 import {mapActions} from 'vuex'
-import ModalHeader from '../Shared/ModalHeader'
-import ModalTaskName from "components/Tasks/Shared/ModalTaskName";
-import ModalDueDate from "components/Tasks/Shared/ModalDueDate";
-import ModalDueTime from "components/Tasks/Shared/ModalDueTime";
-import ModalButton from "components/Tasks/Shared/ModalButton";
 
 export default {
+  props: ['task', 'id'],
   components: {
-    ModalButton,
-    ModalDueTime,
-    ModalDueDate,
-    ModalTaskName,
-    ModalHeader
+    'modal-button': require('src/components/Tasks/Shared/ModalButton').default,
+    'modal-due-time': require('src/components/Tasks/Shared/ModalDueTime').default,
+    'modal-due-date': require('src/components/Tasks/Shared/ModalDueDate').default,
+    'modal-task-name': require('src/components/Tasks/Shared/ModalTaskName').default,
+    'modal-header': require('src/components/Tasks/Shared/ModalHeader').default,
   },
   data() {
     return {
@@ -42,7 +38,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('tasks', ['addTask']),
+    ...mapActions('tasks', ['updateTask']),
     submitForm() {
       this.$refs.modalTaskName.$refs.name.validate()
       if (!this.$refs.modalTaskName.$refs.name.hasError) {
@@ -50,16 +46,19 @@ export default {
       }
     },
     submitTask() {
-      this.addTask(this.taskToSubmit)
+      this.updateTask({
+        id: this.id,
+        updates: this.taskToSubmit
+      })
       this.$emit('close')
     },
     clearDateTime() {
       this.taskToSubmit['dueDate'] = ''
       this.taskToSubmit['dueTime'] = ''
     },
-    logData() {
-      console.log(123)
-    }
+  },
+  mounted() {
+    this.taskToSubmit = Object.assign({}, this.task)
   }
 }
 </script>

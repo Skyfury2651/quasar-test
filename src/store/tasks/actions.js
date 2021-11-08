@@ -1,14 +1,13 @@
 import {uid} from "quasar";
 
 export default {
-  updateTask({commit}, payload) {
-    commit('updateTask', payload)
+  updateTask({commit}, task) {
+    commit('updateTask', task)
   },
   deleteTask({commit}, id) {
     commit('deleteTask', id)
   },
   addTask({commit}, task) {
-    console.log(task)
     const taskId = uid()
     let payload = {
       id: taskId,
